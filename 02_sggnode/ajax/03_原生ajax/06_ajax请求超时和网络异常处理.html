@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 
+        1. 在服务端设置延时3s响应
+        2. 在监听事件中设置超市设置  限制2s内
+        以上两个设置在发送请求时一定会造成请求超时
+        3. 超时回调函数
+        4. 网络异常回调函数
+        以上设置要在open方法调用以前设置
+     -->
+    <style>
+        .box {
+            width: 200px;
+            height: 200px;
+            border: 1px purple solid;
+        }
+    </style>
+</head>
+<body>
+    <button class="btn">点击发送get请求</button>
+     <div class="box"></div>
+     <script>
+        // 获取元素
+        const btn = document.querySelector('.btn');
+        const box = document.querySelector('.box');
+
+        btn.addEventListener('click', function() {
+            // 1. 新建对象
+            const xhr = new XMLHttpRequest();
+            // 超市设置   2s
+            xhr.timeout = 2000;
+            // 超时回调函数
+            xhr.ontimeout = function() {
+                alert('请求超时，请稍候重试');
+            }
+            // 网络异常回调
+            xhr.onerror = function() {
+                alert('你的网络离家出走啦！');
+            }
+            // 2. 初始化
+            xhr.open('GET', "http://127.0.0.1:8000/delay");
+            // 3. 发送
+            xhr.send();
+            // 4. 绑定事件
+            xhr.onreadystatechange = function() {
+                if(xhr.readyState === 4) {
+                    if(xhr.status >= 200 && xhr.status < 300) {
+                        box.innerHTML = xhr.response;
+                    }
+                }
+            }
+        })
+     </script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 200px;
+            height: 200px;
+            border: 1px purple solid;
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+        需求： 一个div，当鼠标经过div发送post请求，并把响应体显示在div中
+     -->
+
+     <!-- 
+        1. post设置请求体
+            xhr.send('a=100&b=200&c=300');
+            // xhr.send('a:100&b:200&c:300');
+            // xhr.send('1233211234567');
+
+        2. AJAX设置请求头
+            * 在open方法的后面调用setRequetHeader方法
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');// 预定义请求头
+            xhr.setRequestHeader('pername', 'atsguigu');// 自定义请求头
+            * 设置请求头后需要在服务端server.js中设置响应头
+                response.setHeader('Access-Control-Allow-Headers', '*');
+            * 设置响应头后仍会报错，因为自定义请求头的存在
+            * 需要把server.js中的post方法更改为all，这样可以响应任何请求方法的请求，post，get等都可以
+      -->
+     <div class="box"></div>
+     <script>
+         // 获取元素
+         const box = document.querySelector('.box');
+
+         box.addEventListener("mouseover", function() {
+
+            // 1. 创建对象
+            const xhr = new XMLHttpRequest();
+            // 2. 初始化 设置方法和url
+            xhr.open('POST', 'http://127.0.0.1:8000/server');
+            // 设置请求头
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');// 预定义请求头
+            xhr.setRequestHeader('pername', 'atsguigu');// 自定义请求头
+
+            // 3. 向服务端发送请求
+            // xhr.send();
+            xhr.send('a=100&b=200&c=300');
+            // xhr.send('a:100&b:200&c:300');
+            // xhr.send('1233211234567');
+            // 4. 事件绑定
+            xhr.onreadystatechange = function() {
+                // 判断服务端是否返回了所有结果
+                if(xhr.readyState === 4) {
+                    // 判断状态码
+                    if(xhr.status >= 200 && xhr.status < 300) {
+                        // 设置box文本
+                        box.innerHTML = xhr.response;
+                    }
+                }
+            }
+         })
+
+     </script>
+</body>
+</html>

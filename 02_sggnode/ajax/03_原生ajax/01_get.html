@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 200px;
+            height: 200px;
+            border: 1px purple solid;
+        }
+    </style>
+    <!-- 
+        1. AJAX设置请求参数，用?分隔，键值对形式，&间隔
+            http://127.0.0.1:8000/server?a=300&b=100&c=200
+     -->
+</head>
+<body>
+    <button>点击发送get请求</button>
+    <div class="box"></div>
+    <script>
+        // 获取button元素
+        const btn = document.querySelector('button')
+        const box = document.querySelector('.box');
+
+        // 绑定点击事件
+        btn.onclick = function() {
+            // 1. 创建对象
+            const xhr = new XMLHttpRequest();
+            // 2. 初始化 设置请求方法和url
+            xhr.open('GET', 'http://127.0.0.1:8000/server?a=300&b=100&c=200');
+            // 3. 发送请求
+            xhr.send();
+            // 4. 事件绑定， 处理服务端返回的结果
+            // on  when 当....时候
+            // readystate 是 xhr 对象中的属性, 表示状态 0 1 2 3 4
+            // 当  xhr.readyState===0 时，（Uninitialized）是表示初始化状态。即xhr对象刚刚被创建了或刚被abort()方法重置了。
+            // 当  xhr.readyState===1时，（Open）是表示xhr调用了open()方法，客户端的请求还没被发送。
+            // 当  xhr.readyState===2时，（Send）是表示xhr已经调用了send()方法，将Http请求发送到了Web服务器，但 还未收到 Web服务器的相应。
+            // 当  xhr.readyState===3时，（Receiving）是表示所有响应头都已被Web服务器接收到，Web服务器开始处理请求，但还没处理完。
+            // 当  xhr.readyState===4时，（Loaded）是表示Web服务器已经响应完客户端的所有请求。Http已经完全接受到了Web服务器的响应数据。
+            // change  改变
+            xhr.onreadystatechange = function() {
+                // 判断 服务端是否返回了所有的结果
+                if(xhr.readyState === 4) {
+                    // 判断响应状态码 
+                    // 2XX响应成功
+                    if(xhr.status >= 200 && xhr.status < 300) {
+                        // 处理响应结果
+                        // console.log(xhr.status);//状态码
+                        // console.log(xhr.statusText);//状态字符串
+                        // console.log(xhr.getAllResponseHeaders());//所有响应头
+                        // console.log(xhr.response);//响应体
+
+                        // 设置box的文本
+                        box.innerHTML = xhr.response;
+                    }
+                }
+            }
+        } 
+    </script>
+</body>
+</html>

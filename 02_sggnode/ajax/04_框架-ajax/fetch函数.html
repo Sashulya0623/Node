@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        1. fetch函数必须接受一个参数——资源的路径。无论请求成功与否，它都返回一个 Promise 对象，resolve 对应请求的 Response
+        2. 请求参数直接写在请求路径中
+     -->
+     <button>fetch发送ajax请求</button>
+     <script>
+         const btn = document.querySelector('button');
+         btn.onclick = function() {
+             fetch('http://127.0.0.1:8000/fetch-server?vip=10', {
+                // 请求方法
+                method: 'POST',
+                // 请求头
+                headers: {
+                    uname: 'atsguigu'
+                },
+                // 请求体
+                body: 'username=admin&password=admin'
+             }).then(response => {
+                 // 返回结果解析类型
+                // return response.text();
+                return response.json();
+             }).then(response => {
+                 console.log(response);
+             });
+         }
+     </script>
+</body>
+</html>

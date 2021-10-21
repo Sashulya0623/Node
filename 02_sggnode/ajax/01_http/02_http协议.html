@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        1. http
+            * 超文本传输协议，是一个基于请求与响应，无状态的，应用层的协议
+            * 常基于TCP/IP协议传输数据
+            * 协议详细规定了浏览器和万维网服务器之间互相通信的规则
+
+        2. 请求报文(重点是格式与参数)
+            * 请求报文是由请求方法、请求url、协议版本、可选的请求首部字段和请求内容实体构成
+
+            ```
+            请求行      POST(请求方法)  /s?ie=utf-8(请求url)  HTTP/1.1 (协议版本)
+            请求头      Host: atguigu.com
+                       Cookie: name=guigu
+                       Content-type: application/x-www-form-urlencoded
+                       User-Agent: chrome 83
+            空行
+            请求体      username=admin&password=admin
+            ```
+
+        3. 响应报文
+            * 响应报文基本由协议版本、表示请求处理结果的状态码和解释状态码的原因短语、
+            * 可选的响应首部字段及实体主体内容
+        ```
+        行      HTTP/1.1(协议版本)  200(状态码)  OK(解释短语)
+        头      Content-Type: text/html;charset=utf-8
+                Content-length: 2048
+                Content-encoding: gzip
+        空行    
+        体      <html>
+                    <head>
+                    </head>
+                    <body>
+                        <h1>尚硅谷</h1>
+                    </body>
+                </html>
+        ```
+
+        4. 状态码
+            4.1 2XX的结果表明请求被正常处理
+                200  请求已正常处理，返回请求资源
+            4.2 4XX表明客户端是发生错误的原因所在
+                401   表明发送的请求需要含有通过http认证的认证信息
+                403   表明服务器拒绝对该资源的访问
+                404    表明服务端没有找到请求的资源(也可使用在服务器拒绝访问并不想给出理由的时候)
+
+        5. chrome 网络控制台查看通信报文
+            打开谷歌浏览器百度 谷粒学院  打开后台-- network  刷新页面会看到页面发送的所有请求，点击第一个请求
+            右侧出现对应信息  主要了解Headers和Response   
+            Preview是网页页面的预览
+
+            5.1 (get请求)Headers包含General、Response Headers、Resquest Headers、Query String Parameters
+                    * 重点看Response Headers响应头、Resquest Headers请求头
+
+                    * Resquest Headers查看请求的内容，右侧的view source查看具体的请求报文
+                    * get请求方式请求体是空的(post请求体有内容)
+                    * Query String Parameters是对url中请求参数的解析
+                    * Response Headers查看响应的内容，右侧的view source查看具体的响应报文
+
+            登录Process On网站
+            5.2 (post请求)Headers包含General、Response Headers、Resquest Headers、Form Data(请求体内容)
+                    * 和请求方法类似
+                    * 不同在于有请求体内容Form Data而get是参数解析Query String Parameters
+     -->
+</body>
+</html>

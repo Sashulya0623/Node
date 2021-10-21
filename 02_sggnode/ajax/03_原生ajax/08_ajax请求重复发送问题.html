@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        1. 同一个ajax请求重复发送，上一个还没加载完就请求下一个
+        2. 解决： 判断是否正在发送请求，若是则取消该请求
+
+            有个过程： 假如第一次请求后再次快速请求
+                        此时第一次请求尚未完成 isSending值为true，
+                        第二次请求时判断isSending时值为true，则取消第一次请求
+                        重新创建一个请求
+     -->
+     <button>发送请求</button>
+    <button>取消请求</button>
+    <script>
+        const btn = document.querySelectorAll('button');
+        let xhr =null;
+        // 定义一个标识符
+        let isSending = false; // 此时没有发送请求
+        // 发送请求
+        btn[0].addEventListener('click', function() {
+            // const xhr = new XMLHttpRequest();
+            //判断标识变量
+            if(isSending) xhr.abort();// 如果正在发送, 则取消该请求, 创建一个新的请求
+            xhr = new XMLHttpRequest();
+            //修改 标识变量的值  生成xhr对象代表发送一次请求
+            isSending = true;
+            xhr.open('GET', 'http://127.0.0.1:8000/delay');
+            xhr.send();
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState === 4){
+                    // 请求结束  修改标识变量
+                    isSending = false;
+                }
+            }
+        })
+
+        // 取消请求
+        btn[1].addEventListener('click', function() {
+            // 由于btn1不能用btn0的xhr对象
+            // 所以定义一个全局变量xhr
+            xhr.abort();
+        })
+    </script>
+</body>
+</html>

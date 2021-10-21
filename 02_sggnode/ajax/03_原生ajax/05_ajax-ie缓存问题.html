@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 200px;
+            height: 200px;
+            border: 1px purple solid;
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+        1. 在ie浏览器中发送ajax请求，浏览器会缓存第一次服务器饭后回的结果
+        2. 再次发送请求，并不是服务器返回结果而是浏览器缓存的结果返回给用户
+        3. 这就导致数据更新不及时
+        4. 解决方法： 请求路径加个时间戳造成每次请求都是新请求
+
+        6. 注意："http://127.0.0.1:8000/ie?t="+Date.now()
+            date不在引号里面
+     -->
+     <button class="btn">点击发送get请求</button>
+     <div class="box"></div>
+     <script>
+        // 获取元素
+        const btn = document.querySelector('.btn');
+        const box = document.querySelector('.box');
+
+        btn.addEventListener('click', function() {
+            // 1. 新建对象
+            const xhr = new XMLHttpRequest();
+            // 2. 初始化
+            xhr.open('GET', "http://127.0.0.1:8000/ie?t="+Date.now());
+            // 3. 发送
+            xhr.send();
+            // 4. 绑定事件
+            xhr.onreadystatechange = function() {
+                if(xhr.readyState === 4) {
+                    if(xhr.status >= 200 && xhr.status < 300) {
+                        box.innerHTML = xhr.response;
+                    }
+                }
+            }
+        })
+     </script>
+</body>
+</html>

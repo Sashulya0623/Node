@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #result {
+            width: 300px;
+            height: 100px;
+            border: solid 1px #78a;
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+       1. 先使用live server打开页面。此时用了http协议
+            * <script src="./js/app.js"></script>
+            * src实际上完整路径： http://127.0.0.1:5500/Node/02_sggnode/ajax/05_%E8%B7%A8%E5%9F%9F/02_JSONP/js/app.js
+            * 测试src实际完整路径可以成功获取数据
+
+            * 在根目录下的server.js设置jsonp-server服务，启动服务
+            * 成功跨域请求
+            * 请注意jsonp返回的是浏览器可以解析的js代码，而不是字符串等。
+            * 本例中返回的是handle函数，函数的实参是请求的结果
+     -->
+    <div id="result"></div>
+    <script>
+        //处理数据
+        function handle(data) {
+            //获取 result 元素
+            const result = document.getElementById('result');
+            result.innerHTML = data.name;
+        }
+    </script>
+    <!-- <script src="./js/app.js"></script> -->
+    <!-- <script src="http://127.0.0.1:5500/Node/02_sggnode/ajax/05_%E8%B7%A8%E5%9F%9F/02_JSONP/js/app.js"></script> -->
+    <script src="http://127.0.0.1:8000/jsonp-server"></script>
+</body>
+</html>

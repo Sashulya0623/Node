@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 200px;
+            height: 200px;
+            border: 1px purple solid;
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+        需求： 有一个div，按下键盘发送get请求，返回服务器中的一个对象数据data
+
+        过程： 在server.js中的对象data先经过json转换
+                然后在Json.html中手动或者设置响应体的类型转换数据
+     -->
+    <!-- 
+        * 服务端响应json数据
+     -->
+     <div class="box"></div>
+     <script>
+         // 获取元素对象
+         const box = document.querySelector('.box');
+
+         // 绑定键盘点击事件
+         window.onkeydown = function(){
+            // 1. 新建对象
+            const xhr = new XMLHttpRequest();
+            // 2. 初始化方法和url
+            xhr.open('GET','http://127.0.0.1:8000/json-server');
+            // 设置响应体数据的类型
+            xhr.responseType = 'json';
+            // 3. 发送请求
+            xhr.send();
+            // 4. 事件绑定
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState === 4){
+                    if(xhr.status >= 200 && xhr.status < 300){
+                        // box.innerHTML = xhr.response;
+                        // 第一种方法：手动转换数据
+                        // let data = JSON.parse(xhr.response);
+                        // box.innerHTML = data.uname;
+
+                        // 第二种方法： 自动转换
+                        // 在open方法的后面设置响应体数据的类型，直接设置为json格式
+                        box.innerHTML = xhr.response.uname;
+                    }
+                }
+            }
+        }
+     </script>
+</body>
+</html>
