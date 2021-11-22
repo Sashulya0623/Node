@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        1. Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境
+            * 是javascript运行环境
+            * 基于V8引擎
+
+            * 作用
+                - 解析运行 JS 代码 
+                - 操作系统资源，如内存、硬盘、网络
+
+            * 应用场景
+                - APP 接口服务
+                - 网页聊天室
+                - 动态网站, 个人博客, 论坛, 商城等
+                - 后端的Web服务，例如服务器端的请求（爬虫），代理请求（跨域）
+                - 前端项目打包(webpack, gulp)
+
+        2. node特点
+            1)	异步非阻塞的I/O（I/O线程池）
+            2)	特别适用于I/O密集型应用(对比传统java服务器)
+            3)	事件循环机制(独有的一套，与浏览器不一样)
+            4)	单线程（成也单线程，败也单线程）
+            5)	跨平台(几乎常见的语言都支持)
+
+        * I/O操作： 文件读写、数据读写
+        * I/O密集型： 频繁操作I/O
+
+        3. 不足之处
+            1)	回调函数嵌套太多、太深（俗称回调地狱）
+            2)	单线程，处理不好CPU 密集型任务
+
+        4. 对比Java服务器
+            客户端   服务器    数据库
+            客人     餐厅      后厨
+        Java： 一个客人一个服务员一道菜   是专人服务
+        node： 一个服务员服务所有客人
+        在点菜特别快(I/O密集型)的情况下，Java服务人力浪费，node服务更经济
+        但如果点菜特别慢(CPU密集型)，node花费时间长存在排队等待的情况，则Java服务更有效率
+        所以node适用于I/O密集型应用
+        Java适用于CPU密集型应用
+
+        5. nodejs交互模式
+            cm命令行输入node命令进入交互模式，直接书写代码
+        6. NodeJS执行JS文件的步骤
+            1. 打开 cmd 命令行(win+r  输入 cmd 敲回车)
+            2. 将命令行的工作目录切换到 JS 文件所在的文件夹
+            3. 执行命令 `node 文件名
+
+     -->
+</body>
+</html>
