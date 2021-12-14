@@ -8,3 +8,9 @@ yarn config set cache-folder "D:\yarn\cache"
 ## 检查当前yarn 的 bin的 位置(yarn global bin:E:\nodejs\npmall\node_global\bin)将其添加到系统环境变量
 ## 设置淘宝镜像:
 yarn config set registry https://registry.npm.taobao.org
+
+
+
+#### 如上
+我已经安装了yarn
+在d盘

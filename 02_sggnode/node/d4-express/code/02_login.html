@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录发送页面</title>
+</head>
+<body>
+    <!-- post请求 -->
+    <!-- 
+        1. 一般路径不写域名，直接写路径    /login 
+        action="http://127.0.0.1:8000/login"
+        重点在服务器中代码的写法
+        一开始本html文件是在其他服务端口上运行的
+        现在改为在服务器文件上读取运行
+        这时html的运行端口与服务器中该方法域名是一样的
+        所以action直接写为路径 /login,
+        它的默认执行路径域名与html运行域名一致
+    -->
+    <!-- <form action="/login" method="post"> -->
+    <form action="/test" method="post">
+        用户名：<input type="text" name="username">
+        密码：<input type="text" name="password">
+        <input type="submit" value="登录">
+    </form>
+</body>
+</html>
